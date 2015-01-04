@@ -9,14 +9,22 @@
 
 chown -R debian:gpio /sys/devices/virtual/gpio
 chown -R debian:gpio /sys/class/gpio
+chown -R debian:gpio /lib/firmware
+chown -R debian:gpio /sys/devices/bone_capemgr.9
+
 find /sys/devices/virtual/gpio -type d -exec chmod 2775 {} \;
 find /sys/devices/virtual/gpio -name "direction" -exec chmod 0660 {} \;
 find /sys/devices/virtual/gpio -name "edge" -exec chmod 0660 {} \;
 find /sys/devices/virtual/gpio -name "value" -exec chmod 0660 {} \;
-
 find /sys/devices/virtual/gpio -name "active_low" -exec chmod 0660 {} \;
+
 chmod 0220 /sys/class/gpio/export
 chmod 0220 /sys/class/gpio/unexport
+chmod -R g+w /lib/firmware
+chmod -R g+w /sys/devices/bone_capemgr.9
+
 find /sys/devices/virtual/gpio -name "uevent" -exec chmod 0660 {} \;
 find /sys/devices/virtual/gpio -name "autosuspend_delay_ms" -exec chmod 0660 {} \;
 find /sys/devices/virtual/gpio -name "control" -exec chmod 0660 {} \;
+
+
